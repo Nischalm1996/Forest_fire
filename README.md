@@ -5,7 +5,7 @@
 |----------|-----|
 | IO0_LORA | D2  |
 | RX_GSM   | D3  |
-| RX_GSM   | D4  |
+| TX_GSM   | D4  |
 | OK       | D5  |
 | LEFT     | D5  |
 | RIGHT    | D6  |
