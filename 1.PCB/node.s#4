@@ -11797,6 +11797,91 @@ W = angled&lt;p&gt;
 </deviceset>
 </devicesets>
 </library>
+<library name="LORA RA-02">
+<packages>
+<package name="RA-02">
+<pad name="P1" x="0" y="0" drill="0.85" shape="square"/>
+<pad name="P2" x="0" y="-2.54" drill="0.85" shape="square"/>
+<pad name="P3" x="0" y="-5.08" drill="0.85" shape="square"/>
+<pad name="P4" x="0" y="-7.62" drill="0.85" shape="square"/>
+<pad name="P5" x="0" y="-10.16" drill="0.85" shape="square"/>
+<pad name="P6" x="0" y="-12.7" drill="0.85" shape="square"/>
+<pad name="P7" x="0" y="-15.24" drill="0.85" shape="square"/>
+<pad name="P8" x="0" y="-17.78" drill="0.85" shape="square"/>
+<pad name="P9" x="25.44" y="-17.78" drill="0.85" shape="square"/>
+<pad name="P10" x="25.44" y="-15.24" drill="0.85" shape="square"/>
+<pad name="P11" x="25.44" y="-12.7" drill="0.85" shape="square"/>
+<pad name="P12" x="25.44" y="-10.16" drill="0.85" shape="square"/>
+<pad name="P13" x="25.44" y="-7.62" drill="0.85" shape="square"/>
+<pad name="P14" x="25.44" y="-5.08" drill="0.85" shape="square"/>
+<pad name="P15" x="25.44" y="-2.54" drill="0.85" shape="square"/>
+<pad name="P16" x="25.44" y="0" drill="0.85" shape="square"/>
+<wire x1="-1.358" y1="1.358" x2="26.798" y2="1.358" width="0.127" layer="21"/>
+<wire x1="26.798" y1="1.358" x2="26.798" y2="-19.138" width="0.127" layer="21"/>
+<wire x1="26.798" y1="-19.138" x2="-1.358" y2="-19.138" width="0.127" layer="21"/>
+<wire x1="-1.358" y1="-19.138" x2="-1.358" y2="1.358" width="0.127" layer="21"/>
+<text x="7.62" y="-3.81" size="1.27" layer="25">LORA RA-02</text>
+</package>
+</packages>
+<symbols>
+<symbol name="RA-02">
+<pin name="GND" x="-38.1" y="22.86" length="middle"/>
+<pin name="GND1" x="-38.1" y="20.32" length="middle"/>
+<pin name="3V3" x="-38.1" y="17.78" length="middle"/>
+<pin name="RST" x="-38.1" y="15.24" length="middle"/>
+<pin name="DIO0" x="-38.1" y="12.7" length="middle"/>
+<pin name="DIO1" x="-38.1" y="10.16" length="middle"/>
+<pin name="DIO2" x="-38.1" y="7.62" length="middle"/>
+<pin name="DIO3" x="-38.1" y="5.08" length="middle"/>
+<pin name="GND3" x="5.08" y="5.08" length="middle" rot="R180"/>
+<pin name="DIO4" x="5.08" y="7.62" length="middle" rot="R180"/>
+<pin name="DIO5" x="5.08" y="10.16" length="middle" rot="R180"/>
+<pin name="SCK" x="5.08" y="12.7" length="middle" rot="R180"/>
+<pin name="MISO" x="5.08" y="15.24" length="middle" rot="R180"/>
+<pin name="MOSI" x="5.08" y="17.78" length="middle" rot="R180"/>
+<pin name="NSS" x="5.08" y="20.32" length="middle" rot="R180"/>
+<pin name="GND2" x="5.08" y="22.86" length="middle" rot="R180"/>
+<wire x1="-33.02" y1="30.48" x2="0" y2="30.48" width="0.254" layer="94"/>
+<wire x1="0" y1="30.48" x2="0" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="0" y1="-2.54" x2="-33.02" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="-33.02" y1="-2.54" x2="-33.02" y2="30.48" width="0.254" layer="94"/>
+<text x="-33.02" y="30.734" size="1.27" layer="95">&gt;NAME</text>
+<text x="-20.32" y="25.4" size="1.27" layer="95">LORA RA-02</text>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="LORA_RA-02">
+<gates>
+<gate name="G$1" symbol="RA-02" x="17.78" y="-12.7"/>
+</gates>
+<devices>
+<device name="" package="RA-02">
+<connects>
+<connect gate="G$1" pin="3V3" pad="P3"/>
+<connect gate="G$1" pin="DIO0" pad="P5"/>
+<connect gate="G$1" pin="DIO1" pad="P6"/>
+<connect gate="G$1" pin="DIO2" pad="P7"/>
+<connect gate="G$1" pin="DIO3" pad="P8"/>
+<connect gate="G$1" pin="DIO4" pad="P10"/>
+<connect gate="G$1" pin="DIO5" pad="P11"/>
+<connect gate="G$1" pin="GND" pad="P1"/>
+<connect gate="G$1" pin="GND1" pad="P2"/>
+<connect gate="G$1" pin="GND2" pad="P16"/>
+<connect gate="G$1" pin="GND3" pad="P9"/>
+<connect gate="G$1" pin="MISO" pad="P13"/>
+<connect gate="G$1" pin="MOSI" pad="P14"/>
+<connect gate="G$1" pin="NSS" pad="P15"/>
+<connect gate="G$1" pin="RST" pad="P4"/>
+<connect gate="G$1" pin="SCK" pad="P12"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -11822,6 +11907,7 @@ W = angled&lt;p&gt;
 <part name="ARDUINO_NANO1" library="ArduinoNanoV30" deviceset="ARDUINO_NANO" device=""/>
 <part name="SV1" library="con-lsta" library_urn="urn:adsk.eagle:library:161" deviceset="FE15-1" device="" package3d_urn="urn:adsk.eagle:package:8206/1"/>
 <part name="SV2" library="con-lsta" library_urn="urn:adsk.eagle:library:161" deviceset="FE15-1" device="" package3d_urn="urn:adsk.eagle:package:8206/1"/>
+<part name="U$2" library="LORA RA-02" deviceset="LORA_RA-02" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -11889,6 +11975,9 @@ W = angled&lt;p&gt;
 <instance part="SV2" gate="G$1" x="-396.24" y="469.9" smashed="yes">
 <attribute name="VALUE" x="-397.51" y="447.04" size="1.778" layer="96"/>
 <attribute name="NAME" x="-397.51" y="490.982" size="1.778" layer="95"/>
+</instance>
+<instance part="U$2" gate="G$1" x="-426.72" y="463.296" smashed="yes">
+<attribute name="NAME" x="-459.74" y="494.03" size="1.27" layer="95"/>
 </instance>
 </instances>
 <busses>
@@ -11978,6 +12067,28 @@ W = angled&lt;p&gt;
 <pinref part="SV1" gate="G$1" pin="2"/>
 <wire x1="-325.12" y1="485.14" x2="-335.28" y2="485.14" width="0.1524" layer="91"/>
 <label x="-330.2" y="485.14" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="U$2" gate="G$1" pin="GND"/>
+<wire x1="-464.82" y1="486.156" x2="-467.868" y2="486.156" width="0.1524" layer="91"/>
+<wire x1="-467.868" y1="486.156" x2="-467.868" y2="485.14" width="0.1524" layer="91"/>
+<pinref part="U$2" gate="G$1" pin="GND1"/>
+<wire x1="-467.868" y1="485.14" x2="-467.868" y2="483.616" width="0.1524" layer="91"/>
+<wire x1="-467.868" y1="483.616" x2="-464.82" y2="483.616" width="0.1524" layer="91"/>
+<wire x1="-467.868" y1="485.14" x2="-473.456" y2="485.14" width="0.1524" layer="91"/>
+<wire x1="-473.456" y1="485.14" x2="-473.456" y2="484.886" width="0.1524" layer="91"/>
+<junction x="-467.868" y="485.14"/>
+<label x="-472.948" y="485.394" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="U$2" gate="G$1" pin="GND2"/>
+<wire x1="-421.64" y1="486.156" x2="-413.258" y2="486.156" width="0.1524" layer="91"/>
+<label x="-419.1" y="486.156" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="U$2" gate="G$1" pin="GND3"/>
+<wire x1="-421.64" y1="468.376" x2="-413.512" y2="468.376" width="0.1524" layer="91"/>
+<label x="-418.338" y="468.376" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="MQD0" class="0">
@@ -12152,6 +12263,11 @@ W = angled&lt;p&gt;
 <wire x1="-325.12" y1="454.66" x2="-335.28" y2="454.66" width="0.1524" layer="91"/>
 <label x="-332.74" y="454.66" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="U$2" gate="G$1" pin="3V3"/>
+<wire x1="-464.82" y1="481.076" x2="-470.408" y2="481.076" width="0.1524" layer="91"/>
+<label x="-470.662" y="481.076" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="D13" class="0">
 <segment>
@@ -12277,6 +12393,49 @@ W = angled&lt;p&gt;
 <pinref part="SV2" gate="G$1" pin="15"/>
 <wire x1="-388.62" y1="487.68" x2="-375.92" y2="487.68" width="0.1524" layer="91"/>
 <label x="-383.54" y="487.68" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="MOSI" class="0">
+<segment>
+<pinref part="U$2" gate="G$1" pin="MOSI"/>
+<wire x1="-421.64" y1="481.076" x2="-413.258" y2="481.076" width="0.1524" layer="91"/>
+<label x="-419.1" y="481.076" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="MISO" class="0">
+<segment>
+<pinref part="U$2" gate="G$1" pin="MISO"/>
+<wire x1="-421.64" y1="478.536" x2="-413.258" y2="478.536" width="0.1524" layer="91"/>
+<label x="-418.846" y="478.536" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="SCK" class="0">
+<segment>
+<pinref part="U$2" gate="G$1" pin="SCK"/>
+<wire x1="-421.64" y1="475.996" x2="-413.258" y2="475.996" width="0.1524" layer="91"/>
+<label x="-417.576" y="475.996" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="SS_LORA" class="0">
+<segment>
+<pinref part="U$2" gate="G$1" pin="NSS"/>
+<wire x1="-421.64" y1="483.616" x2="-413.512" y2="483.616" width="0.1524" layer="91"/>
+<label x="-419.862" y="483.616" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="RST_LORA" class="0">
+<segment>
+<pinref part="U$2" gate="G$1" pin="RST"/>
+<wire x1="-464.82" y1="478.536" x2="-477.012" y2="478.536" width="0.1524" layer="91"/>
+<label x="-477.012" y="478.536" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="IO0_LORA" class="0">
+<segment>
+<pinref part="U$2" gate="G$1" pin="DIO0"/>
+<wire x1="-464.82" y1="475.996" x2="-477.266" y2="475.996" width="0.1524" layer="91"/>
+<wire x1="-477.266" y1="475.996" x2="-477.266" y2="475.742" width="0.1524" layer="91"/>
+<label x="-477.774" y="476.25" size="1.778" layer="95"/>
 </segment>
 </net>
 </nets>

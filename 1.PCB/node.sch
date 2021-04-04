@@ -3,7 +3,7 @@
 <eagle version="9.6.2">
 <drawing>
 <settings>
-<setting alwaysvectorfont="no"/>
+<setting alwaysvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
 <grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
@@ -12023,17 +12023,17 @@ W = angled&lt;p&gt;
 <plain>
 </plain>
 <instances>
-<instance part="PIR" gate="1" x="-228.6" y="370.84" smashed="yes" rot="R270">
-<attribute name="NAME" x="-228.6" y="374.65" size="1.778" layer="95"/>
-<attribute name="VALUE" x="-228.6" y="365.125" size="1.778" layer="96"/>
+<instance part="PIR" gate="1" x="-292.1" y="462.28" smashed="yes" rot="R270">
+<attribute name="NAME" x="-292.1" y="466.09" size="1.778" layer="95"/>
+<attribute name="VALUE" x="-292.1" y="456.565" size="1.778" layer="96"/>
 </instance>
-<instance part="MQ2" gate="G$1" x="-228.6" y="386.08" smashed="yes" rot="R270">
-<attribute name="NAME" x="-228.6" y="392.43" size="1.778" layer="95"/>
-<attribute name="VALUE" x="-228.6" y="377.825" size="1.778" layer="96"/>
+<instance part="MQ2" gate="G$1" x="-292.1" y="477.52" smashed="yes" rot="R270">
+<attribute name="NAME" x="-292.1" y="483.87" size="1.778" layer="95"/>
+<attribute name="VALUE" x="-292.1" y="469.265" size="1.778" layer="96"/>
 </instance>
-<instance part="DHT11" gate="G$1" x="-228.6" y="358.14" smashed="yes" rot="R270">
-<attribute name="NAME" x="-228.6" y="361.95" size="1.778" layer="95"/>
-<attribute name="VALUE" x="-228.6" y="349.885" size="1.778" layer="96"/>
+<instance part="DHT11" gate="G$1" x="-292.1" y="449.58" smashed="yes" rot="R270">
+<attribute name="NAME" x="-292.1" y="453.39" size="1.778" layer="95"/>
+<attribute name="VALUE" x="-292.1" y="441.325" size="1.778" layer="96"/>
 </instance>
 <instance part="FRAME2" gate="G$1" x="-487.68" y="292.1" smashed="yes"/>
 <instance part="FRAME2" gate="G$2" x="-314.96" y="292.1" smashed="yes">
@@ -12098,25 +12098,25 @@ W = angled&lt;p&gt;
 <net name="VCC" class="0">
 <segment>
 <pinref part="PIR" gate="1" pin="1"/>
-<wire x1="-231.14" y1="373.38" x2="-236.22" y2="373.38" width="0.1524" layer="91"/>
-<label x="-236.22" y="373.38" size="1.778" layer="95"/>
+<wire x1="-294.64" y1="464.82" x2="-299.72" y2="464.82" width="0.1524" layer="91"/>
+<label x="-299.72" y="464.82" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="DHT11" gate="G$1" pin="1"/>
-<wire x1="-231.14" y1="360.68" x2="-236.22" y2="360.68" width="0.1524" layer="91"/>
-<label x="-238.76" y="360.68" size="1.778" layer="95"/>
+<wire x1="-294.64" y1="452.12" x2="-299.72" y2="452.12" width="0.1524" layer="91"/>
+<label x="-302.26" y="452.12" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="MQ2" gate="G$1" pin="1"/>
-<wire x1="-231.14" y1="388.62" x2="-236.22" y2="388.62" width="0.1524" layer="91"/>
-<label x="-238.76" y="388.62" size="1.778" layer="95"/>
+<wire x1="-294.64" y1="480.06" x2="-299.72" y2="480.06" width="0.1524" layer="91"/>
+<label x="-302.26" y="480.06" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="PIR" class="0">
 <segment>
 <pinref part="PIR" gate="1" pin="2"/>
-<wire x1="-231.14" y1="370.84" x2="-236.22" y2="370.84" width="0.1524" layer="91"/>
-<label x="-238.76" y="370.84" size="1.778" layer="95"/>
+<wire x1="-294.64" y1="462.28" x2="-299.72" y2="462.28" width="0.1524" layer="91"/>
+<label x="-302.26" y="462.28" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="ARDUINO_NANO1" gate="G$1" pin="D7"/>
@@ -12128,18 +12128,18 @@ W = angled&lt;p&gt;
 <net name="GND" class="0">
 <segment>
 <pinref part="PIR" gate="1" pin="3"/>
-<wire x1="-231.14" y1="368.3" x2="-236.22" y2="368.3" width="0.1524" layer="91"/>
-<label x="-236.22" y="365.76" size="1.778" layer="95"/>
+<wire x1="-294.64" y1="459.74" x2="-299.72" y2="459.74" width="0.1524" layer="91"/>
+<label x="-299.72" y="457.2" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="DHT11" gate="G$1" pin="4"/>
-<wire x1="-231.14" y1="353.06" x2="-236.22" y2="353.06" width="0.1524" layer="91"/>
-<label x="-236.22" y="350.52" size="1.778" layer="95"/>
+<wire x1="-294.64" y1="444.5" x2="-299.72" y2="444.5" width="0.1524" layer="91"/>
+<label x="-299.72" y="441.96" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="MQ2" gate="G$1" pin="2"/>
-<wire x1="-231.14" y1="386.08" x2="-236.22" y2="386.08" width="0.1524" layer="91"/>
-<label x="-238.76" y="386.08" size="1.778" layer="95"/>
+<wire x1="-294.64" y1="477.52" x2="-299.72" y2="477.52" width="0.1524" layer="91"/>
+<label x="-302.26" y="477.52" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="U$3" gate="G$1" pin="RING_SW"/>
@@ -12217,8 +12217,8 @@ W = angled&lt;p&gt;
 <net name="MQ2D0" class="0">
 <segment>
 <pinref part="MQ2" gate="G$1" pin="3"/>
-<wire x1="-231.14" y1="383.54" x2="-236.22" y2="383.54" width="0.1524" layer="91"/>
-<label x="-241.3" y="383.54" size="1.778" layer="95"/>
+<wire x1="-294.64" y1="474.98" x2="-299.72" y2="474.98" width="0.1524" layer="91"/>
+<label x="-304.8" y="474.98" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="ARDUINO_NANO1" gate="G$1" pin="D6"/>
@@ -12230,15 +12230,15 @@ W = angled&lt;p&gt;
 <net name="MQ2A0" class="0">
 <segment>
 <pinref part="MQ2" gate="G$1" pin="4"/>
-<wire x1="-231.14" y1="381" x2="-236.22" y2="381" width="0.1524" layer="91"/>
-<label x="-241.3" y="381" size="1.778" layer="95"/>
+<wire x1="-294.64" y1="472.44" x2="-299.72" y2="472.44" width="0.1524" layer="91"/>
+<label x="-304.8" y="472.44" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="DHT11" class="0">
 <segment>
 <pinref part="DHT11" gate="G$1" pin="2"/>
-<wire x1="-231.14" y1="358.14" x2="-236.22" y2="358.14" width="0.1524" layer="91"/>
-<label x="-243.84" y="358.14" size="1.778" layer="95"/>
+<wire x1="-294.64" y1="449.58" x2="-299.72" y2="449.58" width="0.1524" layer="91"/>
+<label x="-307.34" y="449.58" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="ARDUINO_NANO1" gate="G$1" pin="D5"/>
@@ -12250,8 +12250,8 @@ W = angled&lt;p&gt;
 <net name="NC" class="0">
 <segment>
 <pinref part="DHT11" gate="G$1" pin="3"/>
-<wire x1="-231.14" y1="355.6" x2="-236.22" y2="355.6" width="0.1524" layer="91"/>
-<label x="-238.76" y="355.6" size="1.778" layer="95"/>
+<wire x1="-294.64" y1="447.04" x2="-299.72" y2="447.04" width="0.1524" layer="91"/>
+<label x="-302.26" y="447.04" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="5V" class="0">
