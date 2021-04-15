@@ -7,9 +7,9 @@
 | RX_GSM   | D3  |
 | TX_GSM   | D4  |
 | OK       | D5  |
-| LEFT     | D5  |
-| RIGHT    | D6  |
-| BACK     | D7  |
+| LEFT     | D6  |
+| RIGHT    | D7  |
+| BACK     | D8  |
 | RST_LORA | D9  |
 | SS_LORA  | D10 |
 | MOSI     | D11 |
