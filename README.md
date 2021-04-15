@@ -20,7 +20,7 @@
 - LORA RA02
 - GSM SIM 800L
 - NAVIGATION MODULE
-- DISPLAY I2C 16*2
+- DISPLAY I2C 16*2 https://github.com/VaSe7u/LiquidMenu
 
 ## NODE_DEVICE
 | NAME     | Pin |
