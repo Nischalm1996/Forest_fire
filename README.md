@@ -20,7 +20,7 @@
 - LORA RA02--d
 - GSM SIM 800L--d
 - NAVIGATION MODULE --d
-- DISPLAY I2C 16*2 https://github.com/VaSe7u/LiquidMenu
+- DISPLAY I2C 16*2 --d https://github.com/VaSe7u/LiquidMenu
 
 ## NODE_DEVICE
 | NAME     | Pin |
@@ -33,8 +33,8 @@
 | SS_LORA  | D10 |
 
 ### MODULES USED
-- MQ2 -- code
-- PIR --code
+- MQ2 -- d
+- PIR --d
 - DHT11-- hemanth
 - GPS --d
 - LORA RA02 --d
