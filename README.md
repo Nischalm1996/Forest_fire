@@ -35,6 +35,6 @@
 ### MODULES USED
 - MQ2 -- d
 - PIR --d
-- DHT11-- hemanth
+- DHT11-- d
 - GPS --d
 - LORA RA02 --d
