@@ -17,9 +17,9 @@
 | SCK      | D13 |
 
 ### MODULES USED
-- LORA RA02
-- GSM SIM 800L
-- NAVIGATION MODULE
+- LORA RA02--d
+- GSM SIM 800L--d
+- NAVIGATION MODULE --d
 - DISPLAY I2C 16*2 https://github.com/VaSe7u/LiquidMenu
 
 ## NODE_DEVICE
@@ -33,8 +33,8 @@
 | SS_LORA  | D10 |
 
 ### MODULES USED
-- MQ2
-- PIR
-- DHT11
-- GPS
-- LORA RA02
+- MQ2 -- code
+- PIR --code
+- DHT11-- hemanth
+- GPS --d
+- LORA RA02 --d
