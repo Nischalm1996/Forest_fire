@@ -3,8 +3,8 @@
 2. update co-ordinates
 */
 
-#ifndef _LORA_H
-#define _LORA_H
+#ifndef _GPS_H
+#define _GPS_H
 #include "Arduino.h"
 #include <TinyGPS.h>
 
@@ -31,4 +31,4 @@ public:
     }
 };
 
-#endif //_LORA_H
+#endif //_GPS_H
