@@ -9,6 +9,8 @@
 #include "Arduino.h"
 #include <SPI.h>
 #include <LoRa.h>
+#include <gps.h>
+
 
 const int8_t ss = 10;
 const int8_t reset = 9;
@@ -73,3 +75,4 @@ public:
 };
 
 #endif //LORA_H
+

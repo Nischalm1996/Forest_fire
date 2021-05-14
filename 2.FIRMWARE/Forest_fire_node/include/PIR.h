@@ -6,7 +6,7 @@
 #ifndef _PIR_H
 #define _PIR_H
 #include "Arduino.h"
-const int8 pirPin;
+const int pirPin;
 class PIR
 {
     public:
