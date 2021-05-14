@@ -1,10 +1,16 @@
 #include <Arduino.h>
+#include "sensorCheck.h"
 
-void setup() {
-  // put your setup code here, to run once:
-  pinMode(LED_BUILTIN,OUTPUT);
+sensorCheck fire;
+void setup()
+{
+   put your setup code here, to run once:
+  fire.begin();
 }
 
-void loop() {
+void loop()
+{
   // put your main code here, to run repeatedly:
+  fire.checkingOnce();
+  fire.checkForFire();
 }
