@@ -1,7 +1,7 @@
 /*module to handle lora communications
-1. begin() --to put in setup
-2. sendMessage()
-3. receiveMessage()
+//1. begin() --to put in setup
+//2. sendMessage()
+//3. receiveMessage()
 */
 
 #ifndef _LORA_H
@@ -9,8 +9,6 @@
 #include "Arduino.h"
 #include <SPI.h>
 #include <LoRa.h>
-#include <gps.h>
-
 
 const int8_t ss = 10;
 const int8_t reset = 9;
@@ -22,9 +20,7 @@ public:
     void begin()
     {
         Serial.begin(9600);
-        while (!Serial)
-            ;
-
+        while (!Serial);
         LoRa.setPins(ss, reset, dio0)
 
             //Serial.println("LoRa Sender");
@@ -32,8 +28,7 @@ public:
             if (!LoRa.begin(433E6))
         {
             Serial.println("Starting LoRa failed!");
-            while (1)
-                ;
+            while (1);
         }
     }
     void sendMessage(int counter, String message)
