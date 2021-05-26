@@ -1006,7 +1006,7 @@ design rules under a new name.</description>
 <param name="mdCopperDimension" value="40mil"/>
 <param name="mdDrill" value="6mil"/>
 <param name="mdSmdStop" value="0mil"/>
-<param name="msWidth" value="40mil"/>
+<param name="msWidth" value="25mil"/>
 <param name="msDrill" value="0.35mm"/>
 <param name="msMicroVia" value="9.99mm"/>
 <param name="msBlindViaRatio" value="0.5"/>
@@ -1326,7 +1326,13 @@ design rules under a new name.</description>
 <wire x1="44.704" y1="72.898" x2="44.704" y2="86.995" width="1.016" layer="16"/>
 <wire x1="44.704" y1="86.995" x2="40.259" y2="91.44" width="1.016" layer="16"/>
 <wire x1="40.259" y1="91.44" x2="35.56" y2="91.44" width="1.016" layer="16"/>
-<wire x1="8.128" y1="49.784" x2="8.128" y2="66.294" width="0" layer="19" extent="1-1"/>
+<polygon width="0.6096" layer="16" isolate="1.016">
+<vertex x="0" y="3.81"/>
+<vertex x="58.42" y="3.81"/>
+<vertex x="58.42" y="100.076"/>
+<vertex x="0.127" y="100.076"/>
+<vertex x="0.127" y="3.937"/>
+</polygon>
 </signal>
 <signal name="MQ2D0">
 <contactref element="MQ2" pad="3"/>

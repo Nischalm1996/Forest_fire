@@ -1347,7 +1347,7 @@ design rules under a new name.</description>
 <wire x1="36.068" y1="69.215" x2="39.497" y2="69.215" width="0.762" layer="16"/>
 <wire x1="32.0675" y1="65.2145" x2="32.0675" y2="27.1545" width="0.762" layer="16"/>
 <wire x1="32.0675" y1="27.1545" x2="32.298" y2="26.924" width="0.762" layer="16"/>
-<polygon width="0.762" layer="16">
+<polygon width="0.762" layer="16" isolate="1.27">
 <vertex x="0" y="3.81"/>
 <vertex x="0" y="99.822"/>
 <vertex x="48.387" y="99.822"/>

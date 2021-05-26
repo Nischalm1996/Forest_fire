@@ -1,50 +1,33 @@
 /* program for dht11 sensor.
 1. begin()  initialise variables
-2. float readHumidity()
-3. float readTemperature()
-4. float readTemperatureFah()
-5. float heatIndexFah()
-6. float heatIndexCel()*/
+2. void updateTemp()
+3. float temp=temperature value 
+4. float humid= humidity value
+5. float fahren= fahrenheit value*/
 
-#ifndef _dht11_H
-#define _dht11_H
-#include "Arduino.h"
-#include "DHT.h"
+#define _DHT11_H
 
-#define DHTPIN 2 // Digital pin connected to the DHT sensor
-// Uncomment whatever type you're using!
-#define DHTTYPE DHT11 // DHT 11
-//#define DHTTYPE DHT22   // DHT 22  (AM2302), AM2321
-//#define DHTTYPE DHT21   // DHT 21 (AM2301)
-DHT dht(DHTPIN, DHTTYPE);
+#include <dht.h>  // Include library
+#define outPin 5  // Defines pin number to which the sensor is connected
 
-class dht11
+dht DHT;      // Creates a DHT object
+float temp = 0;
+float humid = 0;
+float fahren = 0;
+
+class dhtClass
 {
-public:
-  void begin()
-  {
-  }
-  float readHumidity()
-  {
-    return (dht.readHumidity());
-  }
-  float readTemperature()
-  {
-    return (dht.readTemperature());
-  }
-  float readTemperatureFah()
-  {
-    return (dht.readTemperature(true));
-  }
-  float heatIndexFah()
-  {
-    return (dht.computeHeatIndex(readTemperatureFah(),readHumidity()));
-  }
-  float heatIndexCel()
-  {
-    return (dht.computeHeatIndex(readTemperature(),readHumidity(),false));
-  }
+  public:
+    void updateTemp()
+    {
+      DHT.read11(outPin);
+      temp = DHT.temperature;
+      // Serial.println(temp);
+      humid = DHT.humidity;
+      //Serial.println(humid);
+      fahren = ((temp * 9.0) / 5.0 + 32.0);
+      //Serial.println(fahren);
+    }
 };
 
-
-#endif //_dht11_H
+#endif //_DHT11_H

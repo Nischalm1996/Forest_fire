@@ -3,7 +3,7 @@
 <eagle version="9.6.2">
 <drawing>
 <settings>
-<setting alwaysvectorfont="yes"/>
+<setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
 <grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
@@ -12403,7 +12403,7 @@ W = angled&lt;p&gt;
 <label x="-470.662" y="481.076" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="D4" class="0">
+<net name="TX_GPS" class="0">
 <segment>
 <pinref part="ARDUINO_NANO1" gate="G$1" pin="D4"/>
 <pinref part="SV2" gate="G$1" pin="9"/>
@@ -12411,7 +12411,7 @@ W = angled&lt;p&gt;
 <label x="-383.54" y="472.44" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="D3" class="0">
+<net name="RX_GPS" class="0">
 <segment>
 <pinref part="ARDUINO_NANO1" gate="G$1" pin="D3"/>
 <pinref part="SV2" gate="G$1" pin="10"/>
