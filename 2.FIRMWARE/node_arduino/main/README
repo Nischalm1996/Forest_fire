@@ -1,0 +1,20 @@
+import Lora
+import Gps
+
+pir 
+temp
+humi
+mq2
+
+
+begin
+{
+begin everything
+print everything in serial
+}
+
+rundevice
+{
+check for fire
+send lora message("1"+coordinates");
+}
