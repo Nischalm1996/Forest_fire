@@ -15,17 +15,14 @@
 #include "LORA.h"
 // Button objects instantiation
 const bool pullup = true;
-Button left(6, pullup);
-Button right(7, pullup);
+Button left(6, pullup, 200);
+Button right(7, pullup, 200);
 //Button up(8, pullup);
 //Button down(9, pullup);
-Button enter(5, pullup);
+Button enter(5, pullup, 200);
 
-
-
-//loara obj
+////loara obj
 LORA comm;
-String Message = "";
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 LiquidLine welcome_line1(1, 0, "Base-Station ");
 LiquidLine welcome_line2(1, 1, "NO FIRE EVENT!");
@@ -37,7 +34,7 @@ LiquidLine FIRESCREEN21(1, 0, "FIRE DETECTED! ");
 LiquidLine FIRESCREEN22(1, 1, " MESSAGE SENT!");
 LiquidScreen FIRESCREEN2(FIRESCREEN21, FIRESCREEN22);
 LiquidLine LORASCR1(1, 0, "LORA");
-LiquidLine LORASCR2(1, 1, Message);
+LiquidLine LORASCR2(1, 1, Mess);
 LiquidScreen LORASCREEN(LORASCR1, LORASCR2);
 
 LiquidMenu menu(lcd);
@@ -67,8 +64,9 @@ class displayMenu1602
       menu.add_screen(FIRESCREEN2);
       menu.add_screen(LORASCREEN);
 
-      comm.begin();
+      comm.beginReceiver();
       menu.update();
+
     }
     void runMenu()
     {
@@ -85,8 +83,8 @@ class displayMenu1602
       }
       if (enter.check() == LOW)
       {
-         // Switches focus to the next line.
-
+        // Switches focus to the next line.
+        Serial.println(F("OK button pressed"));
         menu.switch_focus();
       }
 
@@ -94,9 +92,10 @@ class displayMenu1602
       {
         count = 0;
         menu.update();
-
+        Serial.print("loop:");
+        Serial.println(Mess);
       }
-      Message = comm.receiveMessage();
+      comm.receiveMessage();
 
       count++;
     }

@@ -7,32 +7,46 @@
 #ifndef _LORA_H
 #define _LORA_H
 #include "Arduino.h"
+#include <String.h>
 #include <SPI.h>
 #include <LoRa.h>
 
 const int8_t ss = 10;
 const int8_t reset = 9;
 const int8_t dio0 = 2;
+char *Mess = "temp";
 
 class LORA
 {
   public:
-    void begin()
+    void beginSender()
     {
       Serial.begin(9600);
-      while (!Serial)
-        ;
-
       LoRa.setPins(ss, reset, dio0);
 
       //Serial.println("LoRa Sender");
 
-      while(!LoRa.begin(433E6))
+      while (!LoRa.begin(433E6))
       {
         Serial.println("Starting LoRa failed!");
-        //while (1);
-        delay(1000);
+        while (1);
       }
+
+    }
+    void beginReceiver()
+    {
+      Serial.begin(9600);
+      LoRa.setPins(ss, reset, dio0);
+
+      //Serial.println("LoRa Sender");
+
+      while (!LoRa.begin(433E6))
+      {
+        Serial.println("Starting LoRa failed!");
+        while (1);
+      }
+      LoRa.receive();
+
     }
     void sendMessage(int counter, String message)
     {
@@ -44,33 +58,25 @@ class LORA
         LoRa.beginPacket();
         LoRa.print(message);
         LoRa.endPacket();
-        delay(5000);
       }
     }
 
-    String receiveMessage()
+    void receiveMessage()
     {
-      String Message = "";
+      String mess = "";
       // try to parse packet
       int packetSize = LoRa.parsePacket();
       if (packetSize)
       {
-        // received a packet
-        Serial.print("Received packet '");
-
-        // read packet
-
         while (LoRa.available())
         {
-          Message = Message + (char)LoRa.read();
-        }
-        Serial.println(Message);
+          mess = mess + (char)LoRa.read();
 
-        // print RSSI of packet
-        //Serial.print("' with RSSI ");
-        //Serial.println(LoRa.packetRssi());
+        }
+        Serial.println(mess);
+        mess.toCharArray(Mess,(mess.length()+1));
       }
-      return(Message);
+      //return (Mess);
     }
 };
 
