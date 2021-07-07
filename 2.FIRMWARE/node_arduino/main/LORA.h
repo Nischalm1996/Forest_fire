@@ -1,71 +1,87 @@
 /*module to handle lora communications
-//1. begin() --to put in setup
-//2. sendMessage()
-//3. receiveMessage()
+  1. begin() --to put in setup
+  2. sendMessage()
+  3. receiveMessage()
 */
 
 #ifndef _LORA_H
 #define _LORA_H
 #include "Arduino.h"
+#include <String.h>
 #include <SPI.h>
 #include <LoRa.h>
 
 const int8_t ss = 10;
 const int8_t reset = 9;
 const int8_t dio0 = 2;
+char *Mess = "temp";
 
 class LORA
 {
-public:
-    void begin()
+  public:
+    void beginSender()
     {
-        Serial.begin(9600);
-        while (!Serial);
-        LoRa.setPins(ss, reset, dio0);
+      Serial.begin(9600);
+      LoRa.setPins(ss, reset, dio0);
 
-            //Serial.println("LoRa Sender");
+      //Serial.println("LoRa Sender");
 
-            if (!LoRa.begin(433E6))
-        {
-            Serial.println("Starting LoRa failed!");
-            while (1);
-        }
+      while (!LoRa.begin(433E6))
+      {
+        Serial.println("Starting LoRa failed!");
+        while (1);
+      }
+
+    }
+    void beginReceiver()
+    {
+      Serial.begin(9600);
+      LoRa.setPins(ss, reset, dio0);
+
+      //Serial.println("LoRa Sender");
+
+      while (!LoRa.begin(433E6))
+      {
+        Serial.println("Starting LoRa failed!");
+        while (1);
+      }
+      LoRa.receive();
+
     }
     void sendMessage(int counter, String message)
     {
-        Serial.print("Sending packet: ");
-        Serial.println(counter);
-        for (int i = 1; i <= counter; counter++)
-        {
-            // send packet
-            LoRa.beginPacket();
-            LoRa.print(message);
-            LoRa.endPacket();
-            delay(5000);
-        }
+      while (LoRa.beginPacket() == 0) {
+        Serial.print("waiting for radio ... ");
+        delay(100);
+      }
+      //Serial.print("Sending packet: ");
+      for (int i = 1; i <= counter; i++)
+      {
+        // send packet
+        LoRa.beginPacket();
+        LoRa.print(message);
+        LoRa.endPacket();
+        //Serial.println(counter);
+
+      }
     }
 
-    String receiveMessage()
+    void receiveMessage()
     {
-        // try to parse packet
-        int packetSize = LoRa.parsePacket();
-        if (packetSize)
+      String mess = "";
+      // try to parse packet
+      int packetSize = LoRa.parsePacket();
+      if (packetSize)
+      {
+        while (LoRa.available())
         {
-            // received a packet
-            Serial.print("Received packet '");
+          mess = mess + (char)LoRa.read();
 
-            // read packet
-            String Message = "";
-            while (LoRa.available())
-            {
-                Message = Message + (char)LoRa.read();
-            }
-            Serial.println(Message);
-
-            // print RSSI of packet
-            Serial.print("' with RSSI ");
-            Serial.println(LoRa.packetRssi());
         }
+        Serial.println(mess);
+        mess.toCharArray(Mess, (mess.length() + 1));
+      }
+      //return (Mess);
     }
 };
 
