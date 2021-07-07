@@ -28,24 +28,31 @@ void setup()
   Serial.print("Setup Done");
 
 }
+long count = 0;
 void loop()
 {
-  temper.updateTemp();
   locationObj.getCoordinates();
+  temper.updateTemp();
 
-  Serial.print("humidity:");
-  Serial.println(humid);
-  Serial.print("temperature:");
-  Serial.println(temp);
-  Serial.print("MQ2:");
-  Serial.println(digitalRead(MQ2Pin));
-  Serial.print("motion:");
-  Serial.println(digitalRead(pirPin));
-  Serial.print(Lat, 2);
-  Serial.print(",");
-  Serial.println(Lon, 2);
-  String mess = "1," + (String) Lat + ' ' + (String) Lon ;
-  transmit.sendMessage(2, mess);
-  delay(3000);
+  if (count >= 100)
+  {
 
+    Serial.print("humidity:");
+    Serial.println(humid);
+    Serial.print("temperature:");
+    Serial.println(temp);
+    Serial.print("PIR:");
+    Serial.println(digitalRead(pirPin));
+    Serial.print("MQ2:");
+
+    Serial.println(digitalRead(MQ2Pin));
+    
+    Serial.print(Lat, 2);
+    Serial.print(",");
+    Serial.println(Lon, 2);
+    String mess = "1," + (String) Lat + ' ' + (String) Lon ;
+    transmit.sendMessage(2, mess);
+    count = 0;
+  }
+  count ++;
 }

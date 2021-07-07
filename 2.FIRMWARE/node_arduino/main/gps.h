@@ -9,7 +9,7 @@ double Lat = 0, Lon = 0;
 // The TinyGPS++ object
 TinyGPSPlus gps;
 // The serial connection to the GPS device
-SoftwareSerial serialobj(3, 4);
+SoftwareSerial serialobj(4, 3);
 class Location
 {
   public:
@@ -20,16 +20,22 @@ class Location
 
     void getCoordinates()
     {
+      serialobj.begin(9600);
       while (serialobj.available() > 0) {
-        byte gpsData = serialobj.read();
+        // byte gpsData = serialobj.read();
         gps.encode(serialobj.read());
-        if (gps.location.isUpdated()) {
-          //Serial.print("Latitude= ");
-          Lat = gps.location.lat();
-          //Serial.print(" Longitude= ");
-          Lon = gps.location.lng();
-        }
+      }
+      if (gps.location.isValid()) {
+        //Serial.print("Latitude= ");
+        //Serial.print(gps.location.lat());
+
+        Lat = gps.location.lat();
+        //Serial.print(" Longitude= ");
+        //Serial.print(gps.location.lng());
+
+        Lon = gps.location.lng();
       }
     }
+
 };
 #endif //_gps_H
