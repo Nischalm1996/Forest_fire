@@ -14,7 +14,7 @@
 const int8_t ss = 10;
 const int8_t reset = 9;
 const int8_t dio0 = 2;
-char *Mess = "temp";
+char *Mess = "";
 
 class LORA
 {

@@ -1,25 +1,28 @@
 #ifndef _DHT11_H
 #define _DHT11_H
 
-#include <dht.h>  // Include library
+#include "DHT.h"
 #define outPin 5  // Defines pin number to which the sensor is connected
-
-dht Dht;      // Creates a DHT object
+#define DHTTYPE DHT11
+//dht Dht;      // Creates a DHT object
+DHT Dht(outPin, DHTTYPE);
 float temp = 0;
 float humid = 0;
 float fahren = 0;
+
 
 class dhtClass
 {
   public:
     void updateTemp()
     {
-      Dht.read11(outPin);
-      temp = Dht.temperature;
+      Dht.begin();
+      //Dht.read11(outPin);
+      temp = Dht.readTemperature();
       // Serial.println(temp);
-      humid = Dht.humidity;
+      humid = Dht.readHumidity();
       //Serial.println(humid);
-      fahren = ((temp * 9.0) / 5.0 + 32.0);
+      fahren = Dht.readTemperature(true);
       //Serial.println(fahren);
     }
 };

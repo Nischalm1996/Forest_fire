@@ -46,13 +46,21 @@ void loop()
     Serial.print("MQ2:");
 
     Serial.println(digitalRead(MQ2Pin));
-    
+
     Serial.print(Lat, 2);
     Serial.print(",");
     Serial.println(Lon, 2);
-    String mess = "1," + (String) Lat + ' ' + (String) Lon ;
-    transmit.sendMessage(2, mess);
+    //String mess = "1," + (String) Lat + ' ' + (String) Lon ;
+    //transmit.sendMessage(2, mess);
     count = 0;
+  }
+
+  //if block to detect fire
+  if (temp > 70 && MQ2Pin == HIGH)
+  {
+    //Trigger GPS and send to basestation
+    String mess = "S1A" + (String) Lat + 'B' + (String) Lon + 'C' + (String)temp + 'X' ;
+    transmit.sendMessage(2, mess);
   }
   count ++;
 }

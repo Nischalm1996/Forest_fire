@@ -6,36 +6,40 @@
 #include <LiquidCrystal_I2C.h>
 // The menu wrapper library
 #include <LiquidMenu.h>
-// The I2C LCD object
+#include "GSM_MODULE.h"
 #include "Button.h"
-//OK  D5
-//LEFT  D6
-//RIGHT D7
-//BACK  D8
 #include "LORA.h"
+GSM_MODULE gsmObj;
 // Button objects instantiation
 const bool pullup = true;
 Button left(6, pullup, 200);
 Button right(7, pullup, 200);
-//Button up(8, pullup);
-//Button down(9, pullup);
 Button enter(5, pullup, 200);
 
 ////loara obj
 LORA comm;
+String PHONE = "+919060344544";
+char * cord;
+String Temp = "";
 LiquidCrystal_I2C lcd(0x27, 16, 2);
-LiquidLine welcome_line1(1, 0, "Base-Station ");
-LiquidLine welcome_line2(1, 1, "NO FIRE EVENT!");
+LiquidLine welcome_line1(1, 0, "FOREST FIRE DET");
+LiquidLine welcome_line2(1, 1, "BASE STATION");
+
+LiquidLine welcome_line3(1, 1, "NODES ACTIVE!");
+LiquidLine welcome_line4(1, 1, "NO FIRE EVENT!");
+
+LiquidLine FIRESCREEN11(1, 0, "FIRE IN NODE 1! ");
+LiquidLine FIRESCREEN12(1, 1, cord );
+LiquidLine FIRESCREEN13(1, 1, "FIRE IN NODE 2!");
+LiquidLine messageLine(1, 1, " MESSAGE SENT!");
+LiquidLine tempLine(1, 1, "Temperature", Temp);
+
 LiquidScreen welcome_screen(welcome_line1, welcome_line2);
-LiquidLine FIRESCREEN11(1, 0, "FIRE DETECTED! ");
-LiquidLine FIRESCREEN12(1, 1, " IN NODE X!");
-LiquidScreen FIRESCREEN1(FIRESCREEN11, FIRESCREEN12);
-LiquidLine FIRESCREEN21(1, 0, "FIRE DETECTED! ");
-LiquidLine FIRESCREEN22(1, 1, " MESSAGE SENT!");
-LiquidScreen FIRESCREEN2(FIRESCREEN21, FIRESCREEN22);
-LiquidLine LORASCR1(1, 0, "LORA");
-LiquidLine LORASCR2(1, 1, Mess);
-LiquidScreen LORASCREEN(LORASCR1, LORASCR2);
+LiquidScreen normalScreen(welcome_line3, welcome_line4);
+
+LiquidScreen FIRENODE1(FIRESCREEN11, FIRESCREEN12);
+LiquidScreen FIRENODE2(FIRESCREEN13, FIRESCREEN12);
+LiquidScreen MESSAGE(tempLine, messageLine);
 
 LiquidMenu menu(lcd);
 int count = 0;
@@ -60,13 +64,18 @@ class displayMenu1602
       menu.init();
       // This is the method used to add a screen object to the menu.
       menu.add_screen(welcome_screen);
-      menu.add_screen(FIRESCREEN1);
-      menu.add_screen(FIRESCREEN2);
-      menu.add_screen(LORASCREEN);
+      menu.add_screen(normalScreen);
 
+      menu.add_screen(FIRENODE1);
+      menu.add_screen(FIRENODE2);
+      menu.add_screen(MESSAGE);
       comm.beginReceiver();
       menu.update();
-
+      delay(1000);
+      if (menu.get_currentScreen() == &welcome_screen) {
+        menu.change_screen(&normalScreen);
+        menu.update();
+      }
     }
     void runMenu()
     {
@@ -87,7 +96,10 @@ class displayMenu1602
         Serial.println(F("OK button pressed"));
         menu.switch_focus();
       }
-
+      if (menu.get_currentScreen() == &welcome_screen) {
+        menu.change_screen(&normalScreen);
+        menu.update();
+      }
       if (count >= 30000)
       {
         count = 0;
@@ -95,10 +107,51 @@ class displayMenu1602
         Serial.print("loop:");
         Serial.println(Mess);
       }
-      comm.receiveMessage();
 
+      comm.receiveMessage();
       count++;
     }
 };
 
+void DetectFromNode()
+{
+  String dataIn = (String)Mess;
+  int indexofS = dataIn.indexOf("S");
+  int indexofX = dataIn.indexOf("X");
+  int indexofA = dataIn.indexOf("A");
+  int indexofB = dataIn.indexOf("B");
+  int indexofC = dataIn.indexOf("C");
+
+  String Node = dataIn.substring (indexofS + 1 , indexofA);
+  String Lat = dataIn.substring (indexofA + 1 , indexofB);
+  String Lon = dataIn.substring (indexofB + 1 , indexofC);
+  String temp = dataIn.substring (indexofC + 1 , indexofX);
+  Temp = temp;
+  cord = (char *) Lat + ',' + (char *) Lon;
+  String Message = "Fire Detected at Node" + Node + " \n Lattitude:" + Lat + " \n Longitude:" + Lon + "At Temp: " + temp;
+  if (Node == "1")
+  {
+    //Display Fire and GPS Also Send Message
+    gsmObj.sendMessage(Message, PHONE);
+    for (int i = 0; i < 3; i++)
+    {
+      menu.change_screen(&FIRENODE1);
+      delay(2000);
+      menu.change_screen(&MESSAGE);
+      delay(2000);
+    }
+  }
+  if (Node == "2")
+  {
+    //Display Fire At Node 2 and GPS
+    gsmObj.sendMessage(Message, PHONE);
+    for (int i = 0; i < 3; i++)
+    {
+      menu.change_screen(&FIRENODE2);
+      delay(2000);
+      menu.change_screen(&MESSAGE);
+      delay(2000);
+    }
+  }
+}
 #endif //_DISPLAY_MENU_1602_H
