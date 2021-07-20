@@ -20,19 +20,19 @@ Button enter(5, pullup, 200);
 LORA comm;
 String PHONE = "+919060344544";
 char * cord;
-char * Temp ;
+char * Temp = "0.0" ;
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 LiquidLine welcome_line1(1, 0, "FOREST FIRE DET");
 LiquidLine welcome_line2(1, 1, "BASE STATION");
 
-LiquidLine welcome_line3(1, 1, "NODES ACTIVE!");
+LiquidLine welcome_line3(1, 0, "NODES ACTIVE!");
 LiquidLine welcome_line4(1, 1, "NO FIRE EVENT!");
 
 LiquidLine FIRESCREEN11(1, 0, "FIRE IN NODE 1! ");
 LiquidLine FIRESCREEN12(1, 1, cord );
-LiquidLine FIRESCREEN13(1, 1, "FIRE IN NODE 2!");
+LiquidLine FIRESCREEN13(1, 0, "FIRE IN NODE 2!");
 LiquidLine messageLine(1, 1, " MESSAGE SENT!");
-LiquidLine tempLine(1, 1, "Temperature", Temp);
+LiquidLine tempLine(1, 0, "Temp:", Temp);
 
 LiquidScreen welcome_screen(welcome_line1, welcome_line2);
 LiquidScreen normalScreen(welcome_line3, welcome_line4);
@@ -71,11 +71,14 @@ class displayMenu1602
       menu.add_screen(MESSAGE);
       comm.beginReceiver();
       menu.update();
-      delay(1000);
+      delay(3000);
       if (menu.get_currentScreen() == &welcome_screen) {
         menu.change_screen(&normalScreen);
         menu.update();
       }
+
+      gsmObj.sendMessage("BASE BEGIN", PHONE);
+
     }
     void runMenu()
     {
@@ -110,51 +113,63 @@ class displayMenu1602
 
       comm.receiveMessage();
       count++;
+      DetectFromNode();
+    }
+    void DetectFromNode()
+    {
+      String dataIn = (String)Mess;
+      int indexofS = dataIn.indexOf("S");
+      int indexofX = dataIn.indexOf("X");
+      int indexofA = dataIn.indexOf("A");
+      int indexofB = dataIn.indexOf("B");
+      int indexofC = dataIn.indexOf("C");
+
+      String Node = dataIn.substring (indexofS + 1 , indexofA);
+      String Lat = dataIn.substring (indexofA + 1 , indexofB);
+      String Lon = dataIn.substring (indexofB + 1 , indexofC);
+      String temp = dataIn.substring (indexofC + 1 , indexofX);
+
+      String Message = "Fire Detected at Node" + Node + " \n Lattitude:" + Lat + " \n Longitude:" + Lon + "At Temp: " + temp;
+      Temp = &temp[0];
+      String cordinates = Lat + ',' +  Lon;
+      cord = &cordinates[0];
+
+      if (Node.equals("1"))
+      {
+        //Display Fire and GPS Also Send Message
+        Serial.println(Message);
+        gsmObj.sendMessage(Message, PHONE);
+        for (int i = 0; i < 3; i++)
+        {
+          menu.change_screen(&FIRENODE1);
+          delay(2000);
+          menu.change_screen(&MESSAGE);
+          delay(2000);
+        }
+        Node = "";
+        menu.change_screen(&normalScreen);
+
+      }
+      if (Node.equals("2"))
+      {
+        //Display Fire At Node 2 and GPS
+        Serial.println(Message);
+        gsmObj.sendMessage(Message, PHONE);
+        for (int i = 0; i < 3; i++)
+        {
+          menu.change_screen(&FIRENODE2);
+          delay(2000);
+          menu.change_screen(&MESSAGE);
+          delay(2000);
+
+        }
+        menu.change_screen(&normalScreen);
+
+        Node = "";
+      }
+
     }
 };
 
-void DetectFromNode()
-{
-  String dataIn = (String)Mess;
-  int indexofS = dataIn.indexOf("S");
-  int indexofX = dataIn.indexOf("X");
-  int indexofA = dataIn.indexOf("A");
-  int indexofB = dataIn.indexOf("B");
-  int indexofC = dataIn.indexOf("C");
 
-  String Node = dataIn.substring (indexofS + 1 , indexofA);
-  String Lat = dataIn.substring (indexofA + 1 , indexofB);
-  String Lon = dataIn.substring (indexofB + 1 , indexofC);
-  String temp = dataIn.substring (indexofC + 1 , indexofX);
-
-  String Message = "Fire Detected at Node" + Node + " \n Lattitude:" + Lat + " \n Longitude:" + Lon + "At Temp: " + temp;
-  Temp = &temp[0];
-  String cordinates = Lat + ',' +  Lon;
-  cord = &cordinates[0];
-  
-  if (Node == "1")
-  {
-    //Display Fire and GPS Also Send Message
-    gsmObj.sendMessage(Message, PHONE);
-    for (int i = 0; i < 3; i++)
-    {
-      menu.change_screen(&FIRENODE1);
-      delay(2000);
-      menu.change_screen(&MESSAGE);
-      delay(2000);
-    }
-  }
-  if (Node == "2")
-  {
-    //Display Fire At Node 2 and GPS
-    gsmObj.sendMessage(Message, PHONE);
-    for (int i = 0; i < 3; i++)
-    {
-      menu.change_screen(&FIRENODE2);
-      delay(2000);
-      menu.change_screen(&MESSAGE);
-      delay(2000);
-    }
-  }
-}
 #endif //_DISPLAY_MENU_1602_H

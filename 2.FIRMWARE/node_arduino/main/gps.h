@@ -22,16 +22,17 @@ class Location
     {
       serialobj.begin(9600);
       while (serialobj.available() > 0) {
-        // byte gpsData = serialobj.read();
+        //byte gpsData = serialobj.read();
+        //Serial.print(serialobj.read());
         gps.encode(serialobj.read());
       }
       if (gps.location.isValid()) {
-        //Serial.print("Latitude= ");
-        //Serial.print(gps.location.lat());
+//        Serial.print("Latitude= ");
+//        Serial.print(gps.location.lat());
 
         Lat = gps.location.lat();
-        //Serial.print(" Longitude= ");
-        //Serial.print(gps.location.lng());
+//        Serial.print(" Longitude= ");
+//        Serial.print(gps.location.lng());
 
         Lon = gps.location.lng();
       }

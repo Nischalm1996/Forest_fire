@@ -24,7 +24,7 @@ class LORA
       Serial.begin(9600);
       LoRa.setPins(ss, reset, dio0);
 
-      //Serial.println("LoRa Sender");
+      Serial.println("LoRa Sender");
 
       while (!LoRa.begin(433E6))
       {

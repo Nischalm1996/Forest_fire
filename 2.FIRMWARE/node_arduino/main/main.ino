@@ -24,6 +24,7 @@ void setup()
   Serial.println("smoke motion begin");
   transmit.beginSender();
   //transmit.sendMessage(2, "Hi Base");
+  temper.beginDHT();
   Serial.begin(9600);
   Serial.print("Setup Done");
 
@@ -32,10 +33,11 @@ long count = 0;
 void loop()
 {
   locationObj.getCoordinates();
-  temper.updateTemp();
+  //temper.updateTemp();
 
-  if (count >= 100)
+  if (count >= 10000)
   {
+    temper.updateTemp();
 
     Serial.print("humidity:");
     Serial.println(humid);
@@ -44,7 +46,6 @@ void loop()
     Serial.print("PIR:");
     Serial.println(digitalRead(pirPin));
     Serial.print("MQ2:");
-
     Serial.println(digitalRead(MQ2Pin));
 
     Serial.print(Lat, 2);
@@ -56,11 +57,14 @@ void loop()
   }
 
   //if block to detect fire
-  if (temp > 70 && MQ2Pin == HIGH)
+  if ((temp > 35.0) && (digitalRead(MQ2Pin) == HIGH))
   {
     //Trigger GPS and send to basestation
     String mess = "S1A" + (String) Lat + 'B' + (String) Lon + 'C' + (String)temp + 'X' ;
     transmit.sendMessage(2, mess);
+    Serial.println(mess);
+    Serial.println("MESSAGE SENT");
+
   }
   count ++;
 }
