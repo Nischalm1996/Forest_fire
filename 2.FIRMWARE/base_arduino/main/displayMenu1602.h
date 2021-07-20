@@ -20,7 +20,7 @@ Button enter(5, pullup, 200);
 LORA comm;
 String PHONE = "+919060344544";
 char * cord;
-String Temp = "";
+char * Temp ;
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 LiquidLine welcome_line1(1, 0, "FOREST FIRE DET");
 LiquidLine welcome_line2(1, 1, "BASE STATION");
@@ -126,9 +126,12 @@ void DetectFromNode()
   String Lat = dataIn.substring (indexofA + 1 , indexofB);
   String Lon = dataIn.substring (indexofB + 1 , indexofC);
   String temp = dataIn.substring (indexofC + 1 , indexofX);
-  Temp = temp;
-  cord = (char *) Lat + ',' + (char *) Lon;
+
   String Message = "Fire Detected at Node" + Node + " \n Lattitude:" + Lat + " \n Longitude:" + Lon + "At Temp: " + temp;
+  Temp = &temp[0];
+  String cordinates = Lat + ',' +  Lon;
+  cord = &cordinates[0];
+  
   if (Node == "1")
   {
     //Display Fire and GPS Also Send Message
