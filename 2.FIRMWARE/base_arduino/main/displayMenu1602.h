@@ -18,7 +18,7 @@ Button enter(5, pullup, 200);
 
 ////loara obj
 LORA comm;
-String PHONE = "+919060344544";
+String PHONE = "+916362410309";
 char * cord;
 char * Temp = "0.0" ;
 LiquidCrystal_I2C lcd(0x27, 16, 2);
@@ -77,7 +77,7 @@ class displayMenu1602
         menu.update();
       }
 
-      gsmObj.sendMessage("BASE BEGIN", PHONE);
+      //gsmObj.sendMessage("BASE BEGIN", PHONE);
 
     }
     void runMenu()
@@ -129,7 +129,7 @@ class displayMenu1602
       String Lon = dataIn.substring (indexofB + 1 , indexofC);
       String temp = dataIn.substring (indexofC + 1 , indexofX);
 
-      String Message = "Fire Detected at Node" + Node + " \n Lattitude:" + Lat + " \n Longitude:" + Lon + "At Temp: " + temp;
+      String Message = "Fire Det!\n" + Node + "\nCord:" + Lat + "," + Lon + "\n" + temp;
       Temp = &temp[0];
       String cordinates = Lat + ',' +  Lon;
       cord = &cordinates[0];
@@ -139,7 +139,8 @@ class displayMenu1602
         //Display Fire and GPS Also Send Message
         Serial.println(Message);
         gsmObj.sendMessage(Message, PHONE);
-        for (int i = 0; i < 3; i++)
+        delay(200);
+        for (int i = 0; i < 4; i++)
         {
           menu.change_screen(&FIRENODE1);
           delay(2000);
@@ -155,7 +156,9 @@ class displayMenu1602
         //Display Fire At Node 2 and GPS
         Serial.println(Message);
         gsmObj.sendMessage(Message, PHONE);
-        for (int i = 0; i < 3; i++)
+        delay(200);
+
+        for (int i = 0; i < 4; i++)
         {
           menu.change_screen(&FIRENODE2);
           delay(2000);

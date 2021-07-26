@@ -23,7 +23,6 @@ void setup()
   motion.begin(7);
   Serial.println("smoke motion begin");
   transmit.beginSender();
-  //transmit.sendMessage(2, "Hi Base");
   temper.beginDHT();
   Serial.begin(9600);
   Serial.print("Setup Done");
@@ -60,10 +59,10 @@ void loop()
   if ((temp > 35.0) && (digitalRead(MQ2Pin) == HIGH))
   {
     //Trigger GPS and send to basestation
-    String mess = "S1A" + (String) Lat + 'B' + (String) Lon + 'C' + (String)temp + 'X' ;
+    String mess = "S2A" + (String) Lat + 'B' + (String) Lon + 'C' + (String)temp + 'X' ;
     transmit.sendMessage(2, mess);
     Serial.println(mess);
-    Serial.println("MESSAGE SENT");
+   // Serial.println("MESSAGE SENT");
 
   }
   count ++;
