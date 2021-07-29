@@ -3,22 +3,37 @@
 #include "Arduino.h"
 #include <Wire.h>
 // The I2C LCD library
+#include <stdio.h>
 #include <LiquidCrystal_I2C.h>
 // The menu wrapper library
 #include <LiquidMenu.h>
-#include "GSM_MODULE.h"
+#include <Sim800L.h>
+#include <SoftwareSerial.h>
+
+#define RX  4
+#define TX  3
+
+Sim800L GSM(RX, TX);
+
 #include "Button.h"
 #include "LORA.h"
-GSM_MODULE gsmObj;
+
 // Button objects instantiation
 const bool pullup = true;
 Button left(6, pullup, 200);
 Button right(7, pullup, 200);
 Button enter(5, pullup, 200);
+char* text;
+char* number;
+bool error;           //to catch the response of sendSms
+
+
+
+//SoftwareSerial mySerial(RX, TX);
 
 ////loara obj
 LORA comm;
-String PHONE = "+916362410309";
+char * PHONE = "+919060344544";
 char * cord;
 char * Temp = "0.0" ;
 LiquidCrystal_I2C lcd(0x27, 16, 2);
@@ -51,6 +66,8 @@ class displayMenu1602
     {
 
       Serial.begin(9600);
+
+
 
       // This is the I2C LCD object initialization.
       lcd.init();
@@ -85,18 +102,18 @@ class displayMenu1602
       // Check all the buttons
       if (right.check() == LOW)
       {
-        Serial.println(F("RIGHT button pressed"));
+        //Serial.println(F("RIGHT button pressed"));
         menu.next_screen();
       }
       if (left.check() == LOW)
       {
-        Serial.println(F("LEFT button pressed"));
+        //Serial.println(F("LEFT button pressed"));
         menu.previous_screen();
       }
       if (enter.check() == LOW)
       {
         // Switches focus to the next line.
-        Serial.println(F("OK button pressed"));
+        //Serial.println(F("OK button pressed"));
         menu.switch_focus();
       }
       if (menu.get_currentScreen() == &welcome_screen) {
@@ -107,8 +124,11 @@ class displayMenu1602
       {
         count = 0;
         menu.update();
-        Serial.print("loop:");
-        Serial.println(Mess);
+        //Serial.print("main loop update:");
+        //Serial.println(Mess);
+        menu.change_screen(&normalScreen);
+        //gsmObj.sendMessage("loop", PHONE);
+        Mess = "";
       }
 
       comm.receiveMessage();
@@ -117,6 +137,7 @@ class displayMenu1602
     }
     void DetectFromNode()
     {
+
       String dataIn = (String)Mess;
       int indexofS = dataIn.indexOf("S");
       int indexofX = dataIn.indexOf("X");
@@ -129,7 +150,10 @@ class displayMenu1602
       String Lon = dataIn.substring (indexofB + 1 , indexofC);
       String temp = dataIn.substring (indexofC + 1 , indexofX);
 
-      String Message = "Fire Det!\n" + Node + "\nCord:" + Lat + "," + Lon + "\n" + temp;
+      String Message = "Fire Det!\n" + Node + "\nCord:" + Lat + "," + Lon + "\nT:" + temp;
+      char charMessage[Message.length() + 1]; 
+ 
+    strcpy(charMessage, Message.c_str()); 
       Temp = &temp[0];
       String cordinates = Lat + ',' +  Lon;
       cord = &cordinates[0];
@@ -137,8 +161,11 @@ class displayMenu1602
       if (Node.equals("1"))
       {
         //Display Fire and GPS Also Send Message
-        Serial.println(Message);
-        gsmObj.sendMessage(Message, PHONE);
+        Serial.println("NODE1 statement");
+        GSM.begin(9600);
+        error = GSM.sendSms(PHONE, charMessage);
+        Serial.println("Message Sent");
+
         delay(200);
         for (int i = 0; i < 4; i++)
         {
@@ -147,17 +174,21 @@ class displayMenu1602
           menu.change_screen(&MESSAGE);
           delay(2000);
         }
-        Node = "";
-        menu.change_screen(&normalScreen);
+        Mess = "";
+
 
       }
       if (Node.equals("2"))
       {
-        //Display Fire At Node 2 and GPS
-        Serial.println(Message);
-        gsmObj.sendMessage(Message, PHONE);
-        delay(200);
 
+        //Display Fire At Node 2 and GPS
+        // Serial.println("NODE2 statement");
+        //Serial.println("BEGIN MESSAGE");
+        delay(1000);
+        //mySerial.begin(9600);
+        GSM.begin(9600);
+        error = GSM.sendSms(PHONE, charMessage);
+        Serial.println("Message Sent");
         for (int i = 0; i < 4; i++)
         {
           menu.change_screen(&FIRENODE2);
@@ -166,12 +197,11 @@ class displayMenu1602
           delay(2000);
 
         }
-        menu.change_screen(&normalScreen);
 
-        Node = "";
       }
 
     }
+
 };
 
 

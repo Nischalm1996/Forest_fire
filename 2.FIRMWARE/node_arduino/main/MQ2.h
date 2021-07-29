@@ -7,8 +7,8 @@
 #define _MQ2_H
 #include "Arduino.h"
 
-const byte MQ2Pin = 6;//node1
-//const byte MQ2Pin = 5;//node2
+//const byte MQ2Pin = 6;//node1
+const byte MQ2Pin = 5;//node2
 class MQ2
 {
   public:

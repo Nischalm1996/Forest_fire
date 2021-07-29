@@ -3,9 +3,9 @@
 #include "DHT.h"
 
 //node 1
-#define DHTPIN 5
+//#define DHTPIN 5
 //node 2
-//#define DHTPIN 6
+#define DHTPIN 6
 
 #define DHTTYPE DHT11
 //dht Dht;      // Creates a DHT object

@@ -60,7 +60,7 @@ void loop()
   {
     //Trigger GPS and send to basestation
     String mess = "S2A" + (String) Lat + 'B' + (String) Lon + 'C' + (String)temp + 'X' ;
-    transmit.sendMessage(2, mess);
+    transmit.sendMessage(1, mess);
     Serial.println(mess);
    // Serial.println("MESSAGE SENT");
 

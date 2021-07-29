@@ -19,20 +19,7 @@ char *Mess = "";
 class LORA
 {
   public:
-    void beginSender()
-    {
-      Serial.begin(9600);
-      LoRa.setPins(ss, reset, dio0);
-
-      //Serial.println("LoRa Sender");
-
-      while (!LoRa.begin(433E6))
-      {
-        Serial.println("Starting LoRa failed!");
-        while (1);
-      }
-
-    }
+   
     void beginReceiver()
     {
       Serial.begin(9600);
@@ -48,18 +35,6 @@ class LORA
       LoRa.receive();
 
     }
-    void sendMessage(int counter, String message)
-    {
-      Serial.print("Sending packet: ");
-      Serial.println(counter);
-      for (int i = 1; i <= counter; counter++)
-      {
-        // send packet
-        LoRa.beginPacket();
-        LoRa.print(message);
-        LoRa.endPacket();
-      }
-    }
 
     void receiveMessage()
     {
@@ -73,7 +48,7 @@ class LORA
           mess = mess + (char)LoRa.read();
 
         }
-        Serial.println(mess);
+        //Serial.println(mess);
         mess.toCharArray(Mess,(mess.length()+1));
       }
       //return (Mess);
